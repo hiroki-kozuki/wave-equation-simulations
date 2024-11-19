@@ -1,3 +1,3 @@
 # wave-equation-simulations
 
-Mirror of Sacha Binder's repo
+Main branch is a Mirror of Sacha Binder's repo. AP and Eikonal branches contain my work.
