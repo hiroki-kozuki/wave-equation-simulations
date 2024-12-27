@@ -1,4 +1,39 @@
-﻿import numpy as np
+﻿'''
+Code Logic Overview
+
+
+
+Training Data Generation:
+
+    np.random.seed : The sequence of numbers generated is deterministic, meaning the same seed will always produce the same sequence of random numbers.
+
+    Generates starting positions outside of the electrograms and sets electrogram positions
+    Sets number of speed changes in training data will set this to become randomly generated for each data instance
+    The nature of the propagation means that the speed will be constant up to the changes and so the whole propagation can be described by the speeds_list and the change_positions_list
+
+    The compute_activation_time function:
+    sets t = 0.0 at the first electrogram at position 2
+    calculates distance/speed safetly will need to become much higher fidelity to handle more complex propagation
+
+    The bins divide the range [2, 8] into smaller intervals.
+    Random bins are selected to ensure the speed changes are spread across the range.
+    Speed change points are randomly placed within these bins, while ensuring a minimum separation between consecutive points.
+
+    Then a list of speeds is created (should be length three for two speed changes)
+
+    The activation times are then calculated at the electrogram positions
+
+    For clarity the files that are saved:
+
+        Activation times for the recorded positions (2D numpy array of shape (num_impulses, len(positions_to_record))) i.e each row correspoonds to a training impulse
+        Speeds for each segment of every impulse (1D array of lists of speeds for each impulse)
+        Positions of speed changes for every impulse (as above)
+        The start position of every impulse
+
+'''
+
+
+import numpy as np
 import matplotlib.pyplot as plt
 import os
 
@@ -6,12 +41,12 @@ import os
 np.random.seed(0)
 
 # Parameters
-num_impulses = 500  # Number of training samples
+num_impulses = 1000  # Number of training samples
 start_positions = np.random.uniform(-1, 1, num_impulses)
 positions_to_record = np.array([2, 4, 6, 8])
 
 # New parameter for variable number of speed changes
-num_changes = 2  # You can change this to any number of speed changes
+num_changes = 2 # You can change this to any number of speed changes
 # This means there will be num_changes+1 speed segments
 
 # Lists to store speeds and change positions for each impulse
@@ -20,7 +55,7 @@ change_positions_list = []
 
 def compute_activation_time(start_pos, xi, speeds, change_positions):
     # Combine start position, change positions, and xi into segment boundaries
-    x_points = [start_pos, *change_positions, xi]
+    x_points = [start_pos, *change_positions, xi]  # * is an unpacking operator allowing the list to be added to another list without nesting
     t = 0.0
 
     # Process each segment
@@ -45,7 +80,7 @@ activation_times_data = []
 
 num_bins = 10
 bin_edges = np.linspace(2, 8, num_bins + 1)
-min_separation = 1.5
+min_separation = 1.0
 
 for idx in range(num_impulses):
     while True:
@@ -68,7 +103,7 @@ for idx in range(num_impulses):
     # Speeds: first is 1.0, subsequent are multiples
     speeds = [1.0]
     for _ in range(num_changes):
-        factor = np.random.uniform(0.5, 2.0)
+        factor = np.random.uniform(0.8, 1.9)
         speeds.append(speeds[-1] * factor)
     speeds = np.array(speeds, dtype=float)
 
@@ -90,5 +125,6 @@ change_positions_list = np.array(change_positions_list, dtype=object)
 
 np.save('activation_times.npy', activation_times_data)
 np.save('speeds_list.npy', speeds_list, allow_pickle=True)
+print(speeds_list,'speeds_list')
 np.save('change_positions_list.npy', change_positions_list, allow_pickle=True)
 np.save('start_positions.npy', start_positions)
