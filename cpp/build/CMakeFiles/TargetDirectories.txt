@@ -1,0 +1,3 @@
+/mnt/c/Users/tjstu/OneDrive - Imperial College London/Year 4/MSci Project/Wave_simulations/my-wave-equation-simulations/cpp/build/CMakeFiles/main.dir
+/mnt/c/Users/tjstu/OneDrive - Imperial College London/Year 4/MSci Project/Wave_simulations/my-wave-equation-simulations/cpp/build/CMakeFiles/edit_cache.dir
+/mnt/c/Users/tjstu/OneDrive - Imperial College London/Year 4/MSci Project/Wave_simulations/my-wave-equation-simulations/cpp/build/CMakeFiles/rebuild_cache.dir

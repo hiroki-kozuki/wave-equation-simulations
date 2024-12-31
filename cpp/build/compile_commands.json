@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/mnt/c/Users/tjstu/OneDrive - Imperial College London/Year 4/MSci Project/Wave_simulations/my-wave-equation-simulations/cpp/build",
+  "command": "/usr/bin/g++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -isystem /mnt/c/Users/tjstu/Downloads/libtorch-shared-with-deps-2.5.1+cpu/libtorch/include -isystem /mnt/c/Users/tjstu/Downloads/libtorch-shared-with-deps-2.5.1+cpu/libtorch/include/torch/csrc/api/include  -D_GLIBCXX_USE_CXX11_ABI=0 -g -D_GLIBCXX_USE_CXX11_ABI=0 -o CMakeFiles/main.dir/main.cpp.o -c \"/mnt/c/Users/tjstu/OneDrive - Imperial College London/Year 4/MSci Project/Wave_simulations/my-wave-equation-simulations/cpp/main.cpp\"",
+  "file": "/mnt/c/Users/tjstu/OneDrive - Imperial College London/Year 4/MSci Project/Wave_simulations/my-wave-equation-simulations/cpp/main.cpp"
+}
+]
